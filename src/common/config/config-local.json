@@ -1,0 +1,16 @@
+{
+    "env": "local",
+    "aws": {
+        "input_s3_bucket": "amena-input-image-dev",
+        "output_s3_bucket": "amena-output-image-dev",
+        "input_image_path": "{account_id}/{input_id}/input.jpg",
+        "output_image_path": "{account_id}/{input_id}/output.jpg"
+    },
+    "app": {
+        "limit_of_input_per_user": 5,
+        "limit_of_input_per_system": 1000,
+        "output_expiration_hours": 24,
+        "input_image_limit_y": 1080,
+        "input_image_limit_x": 1920
+    }
+}
