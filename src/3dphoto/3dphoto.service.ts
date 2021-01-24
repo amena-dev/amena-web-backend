@@ -46,6 +46,8 @@ export class TDPhotoService {
         const enqueued = await this.queue.putJson({
             account_id: accountId,
             type: this.engineType
+        }, {
+            DelaySeconds: this.config["aws"]["sqs_delay_sec"]
         })
 
         // Save the image to the input bucket in S3.

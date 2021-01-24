@@ -10,11 +10,11 @@ export class SQS {
         this.queue = new aws.SQS()
     }
 
-    putJson = async (putObject: object): Promise<aws.SQS.SendMessageResult> => {
-        const params = {
+    putJson = async (putObject: object, option={}): Promise<aws.SQS.SendMessageResult> => {
+        const params = Object.assign({
             MessageBody: JSON.stringify(putObject),
             QueueUrl: this.queue_url
-        }
+        }, option)
 
         return new Promise((resolve, reject) => {
             this.queue.sendMessage(params, (err, data) => {
