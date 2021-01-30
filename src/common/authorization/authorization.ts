@@ -21,17 +21,14 @@ export class Authorization {
 
     // Get the user_id from google id token.
     public async getUserId(googleIdToken: string): Promise<string> {
-        return "test-token"
-
-        // TODO
-        // return new Promise((resolve, reject) => {
-        //     verifier.verify(googleIdToken, this.googleClientId, (err, tokenInfo) => {
-        //         if (!err) {
-        //             resolve(tokenInfo.user_id)
-        //         }else{
-        //             reject(err)
-        //         }
-        //     });
-        // })
+        return new Promise((resolve, reject) => {
+            verifier.verify(googleIdToken, this.googleClientId, (err, tokenInfo) => {
+                if (!err) {
+                    resolve(tokenInfo.sub)
+                }else{
+                    reject(err)
+                }
+            });
+        })
     }
 }

@@ -17,7 +17,7 @@ export class TDPhotoService {
     engineType: string
 
     constructor() {
-        this.authorization = new Authorization("google-client-id")
+        this.authorization = new Authorization(process.env["AMENA_GOOGLE_CLIENT_ID"])
         this.config = new Config().get()
         this.inputBucket = new S3(this.config["aws"]["input_s3_bucket"])
         this.outputBucket = new S3(this.config["aws"]["output_s3_bucket"])
