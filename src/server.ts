@@ -20,7 +20,7 @@ class REST {
         server.register(cors, {})
         Router(server)
 
-        server.listen(3000, "0.0.0.0", (err, address) => {
+        server.listen(5000, "0.0.0.0", (err, address) => {
             if (err) throw err;
             console.log(`server(${this.config["env"]}) listening on ${address}`);
         });
