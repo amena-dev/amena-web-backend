@@ -110,7 +110,7 @@ export class TDPhotoService {
 
             results.push({
                 id: input_id,
-                url: await this.inputBucket.getSignedUrl(output.Key)
+                url: await this.outputBucket.getSignedUrl(output.Key)
             })
         }
 
