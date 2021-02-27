@@ -5,6 +5,7 @@
         "output_s3_bucket": "amena-output-image-dev",
         "input_image_path": "{account_id}/{input_id}/input.jpg",
         "output_image_path": "{account_id}/{input_id}/output.jpg",
+        "s3_url_expires_sec": 900,
         "sqs_delay_sec": 1
     },
     "app": {
