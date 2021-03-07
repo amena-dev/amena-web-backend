@@ -7,9 +7,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - env:
-        AWS_ACCESS_KEY_ID: test-id
-        AWS_SECRET_ACCESS_KEY: test-key
       - uses: actions/checkout@v1
       - name: Setup NodeJs
         uses: actions/setup-node@v1
@@ -19,3 +16,6 @@ jobs:
         run: npm install
       - name: Run test
         run: npm test
+        env:
+          AWS_ACCESS_KEY_ID: test-id
+          AWS_SECRET_ACCESS_KEY: test-key
