@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amena-web-backend
+spec:
+  selector:
+    matchLabels:
+      app: amena-web-backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: amena-web-backend
+    spec:
+      nodeSelector:
+        nodeGroup: default
+      containers:
+        - name: amena-web-backend
+          image: 828752933783.dkr.ecr.ap-northeast-1.amazonaws.com/amena-web-backend:0.0.5
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws
+                  key: access_key
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws
+                  key: secret_access_key
+            - name: AMENA_ENV
+              value: production
+            - name: AWS_REGION
+              value: ap-northeast-1
+            - name: AMENA_GOOGLE_CLIENT_ID
+              value: 274565267697-dqm0q7bnei6kgb3jrgtd27pddckpoaf6.apps.googleusercontent.com
+            - name: QUEUE_URL
+              value: https://sqs.ap-northeast-1.amazonaws.com/828752933783/amena-analysis-queue
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: amena-web-backend-service
+spec:
+  selector:
+    app: amena-web-backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+  type: NodePort
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: amena-web-backend-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: amena-web-backend
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 70
