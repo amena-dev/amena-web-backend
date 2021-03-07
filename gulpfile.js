@@ -16,6 +16,7 @@ gulp.task('scripts', gulp.series('clean', () => {
 
 gulp.task('watch', gulp.series('scripts', () => {
     gulp.watch('./src/**/*.ts', gulp.task('scripts'))
+    gulp.watch('./test/**/*.ts', gulp.task('scripts'))
 }))
 
 gulp.task('assets', () => {
