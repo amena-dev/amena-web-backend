@@ -25,7 +25,10 @@
         },
         "testMatch": [
             "**/*.test.+(ts|tsx|js)"
-        ]
+        ],
+        "moduleNameMapper": {
+            " ../../src(.*)$": "<rootDir>/src/$1"
+        }
     },
     "repository": {
         "type": "git",
