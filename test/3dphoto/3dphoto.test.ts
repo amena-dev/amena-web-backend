@@ -75,8 +75,10 @@ describe("3D Photograph", () => {
     it("get 3dphoto output.", async () => {
         const test_s3_object_key = "test-object-key"
         const test_signed_url = "test-signed-url"
+        const test_last_modified_date = new Date()
         const test_output_list_objects = {Contents: [{
             Key: `/${test_s3_object_key}`,
+            LastModified: test_last_modified_date
         }]}
 
         jest.spyOn(target.outputBucket, 'getSignedUrl').mockReturnValue(new Promise(res => {res(test_signed_url)}));
@@ -93,6 +95,7 @@ describe("3D Photograph", () => {
 
         expect(result.id).toBe(test_s3_object_key)
         expect(result.url).toBe(test_signed_url)
+        expect(result.created_at).toBe(test_last_modified_date.getTime())
     })
 
 })
