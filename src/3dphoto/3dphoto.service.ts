@@ -110,7 +110,8 @@ export class TDPhotoService {
 
             results.push({
                 id: input_id,
-                url: await this.outputBucket.getSignedUrl(output.Key, this.config["aws"]["s3_url_expires_sec"])
+                url: await this.outputBucket.getSignedUrl(output.Key, this.config["aws"]["s3_url_expires_sec"]),
+                created_at: output.LastModified.getTime()
             })
         }
 

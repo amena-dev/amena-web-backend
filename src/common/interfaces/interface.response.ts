@@ -15,6 +15,7 @@ export interface Get3DPhotoInputResponse {
 export interface Get3DPhotoOutputElementResponse {
     id: string
     url: string
+    created_at: number
 }
 
 export interface Get3DPhotoOutputResponse {
